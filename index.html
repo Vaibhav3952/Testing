@@ -192,53 +192,20 @@
   }
 
   /* ── Pixel Canvas ── */
-  #hero-canvas-wrap {
-    position: absolute; inset: 0; z-index: 0;
-    pointer-events: none; overflow: hidden;
-  }
+  #hero-canvas-wrap { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
   #hero-canvas-wrap canvas { display: block; width: 100%; height: 100%; }
-  .hero-canvas-vignette {
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 90% 85% at 50% 45%, transparent 5%, var(--paper) 78%);
-  }
+  .hero-canvas-vignette { position: absolute; inset: 0; background: radial-gradient(ellipse 90% 85% at 50% 45%, transparent 5%, var(--paper) 78%); }
 
   /* ── Tech Band Marquee ── */
-  @keyframes marquee-scroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
-  .tech-band {
-    border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-    padding: 15px 0;
-    overflow: hidden;
-    position: relative;
-    z-index: 2;
-    background: var(--paper);
-  }
-  .tech-band-mask {
-    -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
-    mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent);
-  }
-  .tech-band-track {
-    display: flex;
-    width: max-content;
-    align-items: center;
-    animation: marquee-scroll 34s linear infinite;
-  }
+  @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .tech-band { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 15px 0; overflow: hidden; position: relative; z-index: 2; background: var(--paper); }
+  .tech-band-mask { -webkit-mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); }
+  .tech-band-track { display: flex; width: max-content; align-items: center; animation: marquee-scroll 34s linear infinite; }
   .tech-band-track:hover { animation-play-state: paused; }
-  .tech-badge {
-    font-family: var(--mono);
-    font-size: .67rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    padding: 0 28px;
-    white-space: nowrap;
-    transition: color .3s;
-  }
+  .tech-badge { font-family: var(--mono); font-size: .67rem; letter-spacing: 2px; text-transform: uppercase; color: var(--ink-mute); padding: 0 28px; white-space: nowrap; transition: color .3s; }
   .tech-badge:hover { color: var(--claret); }
   .tech-sep { color: var(--claret); font-size: .5rem; flex-shrink: 0; }
+  @media (prefers-reduced-motion: reduce) { .tech-band-track { animation: none; } }
 </style>
 </head>
 <body>
@@ -275,32 +242,7 @@
 
   <div class="tech-band">
     <div class="tech-band-mask">
-      <div class="tech-band-track">
-        <span class="tech-badge">SQL</span><span class="tech-sep">✦</span>
-        <span class="tech-badge">Python</span><span class="tech-sep">✦</span>
-        <span class="tech-badge">R</span><span class="tech-sep">✦</span>
-        <span class="tech-badge">Tableau</span><span class="tech-sep">✦</span>
-        <span class="tech-badge">Excel</span><span class="tech-sep">✦</span>
-        <span class="tech-badge">AWS</span><span class="tech-sep">✦</span>
-        <span class="tech-badge">Oracle NetSuite</span><span class="tech-sep">✦</span>
-        <span class="tech-badge">Agile</span><span class="tech-sep">✦</span>
-        <span class="tech-badge">Data Mining</span><span class="tech-sep">✦</span>
-        <span class="tech-badge">Business Analytics</span><span class="tech-sep">✦</span>
-        <span class="tech-badge">KPI Development</span><span class="tech-sep">✦</span>
-        <span class="tech-badge">Process Mapping</span><span class="tech-sep">✦</span>
-        <span class="tech-badge">SQL</span><span class="tech-sep">✦</span>
-        <span class="tech-badge">Python</span><span class="tech-sep">✦</span>
-        <span class="tech-badge">R</span><span class="tech-sep">✦</span>
-        <span class="tech-badge">Tableau</span><span class="tech-sep">✦</span>
-        <span class="tech-badge">Excel</span><span class="tech-sep">✦</span>
-        <span class="tech-badge">AWS</span><span class="tech-sep">✦</span>
-        <span class="tech-badge">Oracle NetSuite</span><span class="tech-sep">✦</span>
-        <span class="tech-badge">Agile</span><span class="tech-sep">✦</span>
-        <span class="tech-badge">Data Mining</span><span class="tech-sep">✦</span>
-        <span class="tech-badge">Business Analytics</span><span class="tech-sep">✦</span>
-        <span class="tech-badge">KPI Development</span><span class="tech-sep">✦</span>
-        <span class="tech-badge">Process Mapping</span><span class="tech-sep">✦</span>
-      </div>
+      <div class="tech-band-track" id="tech-track"></div>
     </div>
   </div>
 
@@ -348,12 +290,11 @@
           <div>
             <h3>Site Operations Intelligence Analyst</h3>
             <ul>
-              <li>Collect, organize, and analyze operational data across inventory, material movement, deliveries, and logistics in Python and SQL — tracking performance indicators and improving fulfillment timelines across a regulated medical-technology environment.</li>
-              <li>Build and maintain real-time dashboards, reports, and operational monitoring controls in Tableau and R, supporting inventory control, logistics performance, shipping-cost analysis, on-time availability, and executive decision-making.</li>
-              <li>Support cross-functional demand analysis for Operations, Supply Chain, Service, Field Engineering, Logistics, Procurement, Finance, and QA&amp;RA — translating stakeholder needs into structured, data-driven recommendations.</li>
-              <li>Monitor activity status and escalate operational bottlenecks, data inconsistencies, delays, and risks to responsible leadership, ensuring traceability and reliability of information across applicable systems.</li>
-              <li>Prepare consolidated data packages for management meetings, operational reviews, and performance reviews — supporting leadership priorities, capacity planning, and resource decisions.</li>
-              <li>Identify and recommend improvements in processes, controls, tools, indicators, and workflows, contributing to the standardization and continuous improvement of site operations.</li>
+              <li>Support site-operations management through analysis, indicators, and controls that improve operational visibility, productivity, and decision-making across the supply chain.</li>
+              <li>Analyze operational and inventory data across procurement, assembly, testing, and logistics in Python and SQL to identify inefficiencies and improve fulfillment timelines.</li>
+              <li>Build and maintain real-time dashboards, reports, and KPI controls in R and Tableau supporting inventory control, logistics performance, shipping-cost analysis, and on-time availability.</li>
+              <li>Flag deviations, risks, bottlenecks, and data inconsistencies, and provide consolidated analytics that support leadership decision-making and operational reviews.</li>
+              <li>Interface across Operations, Supply Chain, Logistics, Field Engineering, Procurement, Finance, and Quality &amp; Regulatory Affairs, ensuring traceability and compliance in a regulated medical-device environment.</li>
             </ul>
           </div>
         </div>
@@ -580,107 +521,55 @@
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
+  // ── Tech marquee (build + duplicate for seamless loop) ──
+  (function () {
+    const track = document.getElementById('tech-track');
+    if (!track) return;
+    const items = ['SQL','Python','R','Tableau','Excel','AWS','Oracle NetSuite','Agile','Data Mining','Business Analytics','KPI Development','Process Mapping'];
+    const build = () => items.map(t =>
+      `<span class="tech-badge">${t}</span><span class="tech-sep">✦</span>`).join('');
+    track.innerHTML = build() + build(); // two copies → -50% loop is seamless
+  })();
+
   // ── Pixel Canvas ──
   (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const canvas = document.getElementById('hero-canvas');
     const wrap   = document.getElementById('hero-canvas-wrap');
     if (!canvas || !wrap) return;
     const ctx = canvas.getContext('2d');
-
-    const COLORS = [
-      'rgba(139,36,51,0.55)',
-      'rgba(139,36,51,0.3)',
-      'rgba(106,100,87,0.35)',
-      'rgba(148,141,125,0.22)',
-      'rgba(28,26,22,0.15)',
-    ];
-    const GAP   = 6;
-    const SPEED = 0.022;
-
-    const rand  = (a, b) => Math.random() * (b - a) + a;
+    const COLORS = ['rgba(139,36,51,0.55)','rgba(139,36,51,0.3)','rgba(106,100,87,0.35)','rgba(148,141,125,0.22)','rgba(28,26,22,0.15)'];
+    const GAP = 6, SPEED = 0.022;
+    const rand = (a, b) => Math.random() * (b - a) + a;
 
     function makePixel(x, y, color, w, h) {
-      const p = {
-        x, y, color,
-        speed:       rand(0.08, 0.4) * SPEED,
-        size:        0,
-        sizeStep:    rand(0.12, 0.28),
-        minSize:     0.5,
-        maxSize:     rand(0.5, 2),
-        delay:       Math.sqrt((x - w / 2) ** 2 + (y - h / 2) ** 2) * 0.6,
-        counter:     0,
-        counterStep: rand(1.8, 3.2) + (w + h) * 0.008,
-        isIdle:      false,
-        isReverse:   false,
-        isShimmer:   false,
-      };
-
-      p.draw = function () {
-        const off = 1 - p.size * 0.5;
-        ctx.fillStyle = p.color;
-        ctx.fillRect(p.x + off, p.y + off, p.size, p.size);
-      };
-
-      p.shimmer = function () {
-        if (p.size >= p.maxSize) p.isReverse = true;
-        else if (p.size <= p.minSize) p.isReverse = false;
-        p.isReverse ? (p.size -= p.speed) : (p.size += p.speed);
-      };
-
-      p.appear = function () {
-        p.isIdle = false;
-        if (p.counter <= p.delay) { p.counter += p.counterStep; return; }
-        if (p.size >= p.maxSize) p.isShimmer = true;
-        if (p.isShimmer) p.shimmer();
-        else p.size += p.sizeStep;
-        p.draw();
-      };
-
-      p.disappear = function () {
-        p.isShimmer = false; p.counter = 0;
-        if (p.size <= 0) { p.isIdle = true; return; }
-        p.size -= 0.1;
-        p.draw();
-      };
-
+      const p = { x, y, color, speed: rand(0.08,0.4)*SPEED, size: 0, sizeStep: rand(0.12,0.28),
+        minSize: 0.5, maxSize: rand(0.5,2), delay: Math.sqrt((x-w/2)**2+(y-h/2)**2)*0.6,
+        counter: 0, counterStep: rand(1.8,3.2)+(w+h)*0.008, isIdle: false, isReverse: false, isShimmer: false };
+      p.draw = function () { const off = 1 - p.size*0.5; ctx.fillStyle = p.color; ctx.fillRect(p.x+off, p.y+off, p.size, p.size); };
+      p.shimmer = function () { if (p.size >= p.maxSize) p.isReverse = true; else if (p.size <= p.minSize) p.isReverse = false; p.isReverse ? (p.size -= p.speed) : (p.size += p.speed); };
+      p.appear = function () { p.isIdle = false; if (p.counter <= p.delay) { p.counter += p.counterStep; return; } if (p.size >= p.maxSize) p.isShimmer = true; if (p.isShimmer) p.shimmer(); else p.size += p.sizeStep; p.draw(); };
       return p;
     }
 
-    let pixels = [];
-    let rafId  = 0;
-    const FPS  = 1000 / 60;
-    let last   = performance.now();
-
+    let pixels = [], rafId = 0; const FPS = 1000/60; let last = performance.now();
     function init() {
       const { width, height } = wrap.getBoundingClientRect();
       const w = Math.floor(width), h = Math.floor(height);
-      canvas.width  = w; canvas.height = h;
-      canvas.style.width  = w + 'px';
-      canvas.style.height = h + 'px';
+      canvas.width = w; canvas.height = h; canvas.style.width = w+'px'; canvas.style.height = h+'px';
       pixels = [];
-      for (let x = 0; x < w; x += GAP)
-        for (let y = 0; y < h; y += GAP)
-          pixels.push(makePixel(x, y, COLORS[Math.floor(Math.random() * COLORS.length)], w, h));
+      for (let x = 0; x < w; x += GAP) for (let y = 0; y < h; y += GAP)
+        pixels.push(makePixel(x, y, COLORS[Math.floor(Math.random()*COLORS.length)], w, h));
     }
-
-    function loop(mode) {
+    function loop() {
       cancelAnimationFrame(rafId);
-      function frame(now) {
-        rafId = requestAnimationFrame(frame);
-        if (now - last < FPS) return;
-        last = now;
+      function frame(now) { rafId = requestAnimationFrame(frame); if (now - last < FPS) return; last = now;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        let allIdle = true;
-        for (const p of pixels) { p[mode](); if (!p.isIdle) allIdle = false; }
-        if (allIdle) cancelAnimationFrame(rafId);
-      }
+        for (const p of pixels) p.appear(); }
       rafId = requestAnimationFrame(frame);
     }
-
-    init();
-    loop('appear');
-
-    const ro = new ResizeObserver(() => { init(); loop('appear'); });
+    init(); loop();
+    let t; const ro = new ResizeObserver(() => { clearTimeout(t); t = setTimeout(() => { init(); loop(); }, 150); });
     ro.observe(wrap);
   })();
 </script>
